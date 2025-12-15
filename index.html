@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.3">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Stock Performance Data&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; padding: 20px; background-color: #f4f4f9; color: #333; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.container { max-width: 1000px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>h1 { margin-top: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input#searchInput { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-size: 16px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>th, td { text-align: left; padding: 12px; border-bottom: 1px solid #ddd; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>th { background-color: #007bff; color: white; cursor: pointer; user-select: none; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>th:hover { background-color: #0056b3; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>tr:hover { background-color: #f1f1f1; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Utility classes for coloring */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.positive { color: green; font-weight: bold; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.negative { color: red; font-weight: bold; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.short { color: #d9534f; font-weight: bold; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.long { color: #5cb85c; font-weight: bold; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Responsive table */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media screen and (max-width: 600px) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>table { display: block; overflow-x: auto; white-space: nowrap; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Market Performance Data&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search by Ticker (e.g., ARKK)..."&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;table id="stockTable"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;thead&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;th onclick="sortTable(0)"&gt;Ticker &amp;#x21C5;&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;th onclick="sortTable(1)"&gt;Direction &amp;#x21C5;&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;th onclick="sortTable(2)"&gt;Start Date &amp;#x21C5;&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;th onclick="sortTable(3)"&gt;End Date &amp;#x21C5;&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;th onclick="sortTable(4)"&gt;Days &amp;#x21C5;&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;th onclick="sortTable(5)"&gt;Win Rate &amp;#x21C5;&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;th onclick="sortTable(6)"&gt;Avg Return &amp;#x21C5;&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/thead&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;tbody&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;ARKK&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 17&lt;/td&gt;&lt;td&gt;Dec 29&lt;/td&gt;&lt;td&gt;12&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-2.74%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;ARKK&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 17&lt;/td&gt;&lt;td&gt;Dec 30&lt;/td&gt;&lt;td&gt;13&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-2.22%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;ARKK&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 17&lt;/td&gt;&lt;td&gt;Jan 01&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="negative"&gt;-2.75%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;ARKK&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 17&lt;/td&gt;&lt;td&gt;Jan 02&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="negative"&gt;-2.75%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;AVGO&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Nov 27&lt;/td&gt;&lt;td&gt;Dec 16&lt;/td&gt;&lt;td&gt;19&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;10.75%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;AVGO&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Nov 28&lt;/td&gt;&lt;td&gt;Dec 16&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;10.80%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;AVGO&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Nov 29&lt;/td&gt;&lt;td&gt;Dec 16&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;11.04%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;AVGO&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Nov 30&lt;/td&gt;&lt;td&gt;Dec 16&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;10.70%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;AVGO&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 01&lt;/td&gt;&lt;td&gt;Dec 16&lt;/td&gt;&lt;td&gt;15&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;10.90%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;AVGO&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 02&lt;/td&gt;&lt;td&gt;Dec 16&lt;/td&gt;&lt;td&gt;14&lt;/td&gt;&lt;td&gt;100.0%&lt;/td&gt;&lt;td class="positive"&gt;11.53%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;AVGO&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 03&lt;/td&gt;&lt;td&gt;Dec 16&lt;/td&gt;&lt;td&gt;13&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;10.64%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;AVGO&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 04&lt;/td&gt;&lt;td&gt;Dec 16&lt;/td&gt;&lt;td&gt;12&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;10.17%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;AVGO&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 05&lt;/td&gt;&lt;td&gt;Dec 16&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;10.23%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;AVGO&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 06&lt;/td&gt;&lt;td&gt;Dec 16&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;9.70%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;AVGO&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 07&lt;/td&gt;&lt;td&gt;Dec 16&lt;/td&gt;&lt;td&gt;9&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;8.93%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;AVGO&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 08&lt;/td&gt;&lt;td&gt;Dec 16&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;7.99%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;AVGO&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 09&lt;/td&gt;&lt;td&gt;Dec 16&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;6.71%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;AVGO&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 20&lt;/td&gt;&lt;td&gt;Dec 26&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;2.03%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;CRWD&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 07&lt;/td&gt;&lt;td&gt;Dec 15&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;td&gt;100.0%&lt;/td&gt;&lt;td class="positive"&gt;4.31%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;CRWD&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 09&lt;/td&gt;&lt;td&gt;Dec 15&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;td&gt;83.3%&lt;/td&gt;&lt;td class="positive"&gt;4.27%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;EWZ&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 20&lt;/td&gt;&lt;td&gt;Dec 28&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;2.44%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;FXI&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 20&lt;/td&gt;&lt;td&gt;Dec 31&lt;/td&gt;&lt;td&gt;12&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;2.12%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;FXI&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Nov 30&lt;/td&gt;&lt;td&gt;Dec 18&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="negative"&gt;-2.61%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;FXI&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Nov 30&lt;/td&gt;&lt;td&gt;Dec 19&lt;/td&gt;&lt;td&gt;19&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="negative"&gt;-2.60%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDX&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 12&lt;/td&gt;&lt;td&gt;Dec 29&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;3.05%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDX&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 17&lt;/td&gt;&lt;td&gt;Dec 29&lt;/td&gt;&lt;td&gt;12&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;2.88%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDX&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 18&lt;/td&gt;&lt;td&gt;Dec 29&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;3.17%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDX&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 19&lt;/td&gt;&lt;td&gt;Dec 24&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;3.19%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDX&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 19&lt;/td&gt;&lt;td&gt;Jan 07&lt;/td&gt;&lt;td&gt;19&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;5.58%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDX&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 20&lt;/td&gt;&lt;td&gt;Dec 29&lt;/td&gt;&lt;td&gt;9&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;2.67%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDX&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 20&lt;/td&gt;&lt;td&gt;Jan 07&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;4.84%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDX&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 21&lt;/td&gt;&lt;td&gt;Jan 07&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;4.38%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDX&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 01&lt;/td&gt;&lt;td&gt;Dec 15&lt;/td&gt;&lt;td&gt;14&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-2.27%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDXJ&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 18&lt;/td&gt;&lt;td&gt;Jan 05&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;6.69%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDXJ&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 19&lt;/td&gt;&lt;td&gt;Jan 05&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;6.69%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDXJ&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 19&lt;/td&gt;&lt;td&gt;Jan 05&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;6.11%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDXJ&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 19&lt;/td&gt;&lt;td&gt;Jan 07&lt;/td&gt;&lt;td&gt;19&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;6.62%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDXJ&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 20&lt;/td&gt;&lt;td&gt;Jan 05&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;5.95%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDXJ&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 20&lt;/td&gt;&lt;td&gt;Jan 05&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;6.32%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDXJ&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 21&lt;/td&gt;&lt;td&gt;Jan 05&lt;/td&gt;&lt;td&gt;15&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;5.33%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDXJ&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 21&lt;/td&gt;&lt;td&gt;Jan 05&lt;/td&gt;&lt;td&gt;15&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;5.53%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GDXJ&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 21&lt;/td&gt;&lt;td&gt;Jan 07&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;5.26%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GLD&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 15&lt;/td&gt;&lt;td&gt;Dec 31&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;2.31%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GLD&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 19&lt;/td&gt;&lt;td&gt;Jan 07&lt;/td&gt;&lt;td&gt;19&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;2.95%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GLD&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 20&lt;/td&gt;&lt;td&gt;Jan 07&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;2.61%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;GLD&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 21&lt;/td&gt;&lt;td&gt;Jan 07&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;2.60%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;IYR&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 08&lt;/td&gt;&lt;td&gt;Dec 21&lt;/td&gt;&lt;td&gt;13&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-2.05%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;META&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 16&lt;/td&gt;&lt;td&gt;Dec 22&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-2.11%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;MU&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 19&lt;/td&gt;&lt;td&gt;Jan 07&lt;/td&gt;&lt;td&gt;19&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;7.47%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;PLTR&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Nov 30&lt;/td&gt;&lt;td&gt;Dec 15&lt;/td&gt;&lt;td&gt;15&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-2.93%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;PLTR&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Nov 30&lt;/td&gt;&lt;td&gt;Dec 16&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-4.53%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;PLTR&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Nov 30&lt;/td&gt;&lt;td&gt;Dec 18&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-7.53%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;PLTR&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 07&lt;/td&gt;&lt;td&gt;Dec 18&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-5.33%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;PLTR&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 14&lt;/td&gt;&lt;td&gt;Dec 28&lt;/td&gt;&lt;td&gt;14&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-5.33%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;PLTR&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 14&lt;/td&gt;&lt;td&gt;Dec 29&lt;/td&gt;&lt;td&gt;15&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-5.89%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;PLTR&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 21&lt;/td&gt;&lt;td&gt;Dec 31&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;100.0%&lt;/td&gt;&lt;td class="negative"&gt;-4.36%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;PLTR&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 21&lt;/td&gt;&lt;td&gt;Jan 04&lt;/td&gt;&lt;td&gt;14&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-7.06%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;PPLT&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 15&lt;/td&gt;&lt;td&gt;Dec 26&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;2.01%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;PPLT&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 19&lt;/td&gt;&lt;td&gt;Jan 07&lt;/td&gt;&lt;td&gt;19&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;4.75%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;PPLT&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 20&lt;/td&gt;&lt;td&gt;Jan 07&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;4.45%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;PPLT&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 21&lt;/td&gt;&lt;td&gt;Jan 07&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;4.17%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;UBER&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 13&lt;/td&gt;&lt;td&gt;Dec 23&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;td&gt;83.3%&lt;/td&gt;&lt;td class="positive"&gt;4.30%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;UNG&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 12&lt;/td&gt;&lt;td&gt;Dec 17&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;77.8%&lt;/td&gt;&lt;td class="negative"&gt;-3.76%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;VXX&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 13&lt;/td&gt;&lt;td&gt;Dec 19&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;td&gt;85.7%&lt;/td&gt;&lt;td class="positive"&gt;6.26%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;VXX&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 14&lt;/td&gt;&lt;td&gt;Dec 20&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;td&gt;85.7%&lt;/td&gt;&lt;td class="positive"&gt;5.51%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;VXX&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 19&lt;/td&gt;&lt;td&gt;Jan 01&lt;/td&gt;&lt;td&gt;14&lt;/td&gt;&lt;td&gt;85.7%&lt;/td&gt;&lt;td class="negative"&gt;-6.74%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;VXX&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 19&lt;/td&gt;&lt;td&gt;Jan 02&lt;/td&gt;&lt;td&gt;14&lt;/td&gt;&lt;td&gt;85.7%&lt;/td&gt;&lt;td class="negative"&gt;-6.74%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;VXX&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 20&lt;/td&gt;&lt;td&gt;Dec 26&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;td&gt;85.7%&lt;/td&gt;&lt;td class="negative"&gt;-5.68%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;XOP&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 18&lt;/td&gt;&lt;td&gt;Dec 26&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;2.84%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;XOP&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 19&lt;/td&gt;&lt;td&gt;Dec 26&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="positive"&gt;3.13%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;XOP&lt;/td&gt;&lt;td class="long"&gt;LONG&lt;/td&gt;&lt;td&gt;Dec 20&lt;/td&gt;&lt;td&gt;Dec 26&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;td&gt;90.0%&lt;/td&gt;&lt;td class="positive"&gt;3.28%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;XOP&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 04&lt;/td&gt;&lt;td&gt;Dec 15&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-3.23%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;XOP&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 04&lt;/td&gt;&lt;td&gt;Dec 16&lt;/td&gt;&lt;td&gt;12&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-3.50%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;XOP&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 04&lt;/td&gt;&lt;td&gt;Dec 17&lt;/td&gt;&lt;td&gt;13&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-3.87%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;XOP&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 04&lt;/td&gt;&lt;td&gt;Dec 18&lt;/td&gt;&lt;td&gt;14&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-4.93%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;XOP&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 04&lt;/td&gt;&lt;td&gt;Dec 19&lt;/td&gt;&lt;td&gt;15&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-5.19%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;XOP&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 04&lt;/td&gt;&lt;td&gt;Dec 20&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-5.39%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;XOP&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 10&lt;/td&gt;&lt;td&gt;Dec 16&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-2.65%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;XOP&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 10&lt;/td&gt;&lt;td&gt;Dec 17&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-3.03%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;XOP&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 10&lt;/td&gt;&lt;td&gt;Dec 18&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-4.09%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;tr&gt;&lt;td&gt;XOP&lt;/td&gt;&lt;td class="short"&gt;SHORT&lt;/td&gt;&lt;td&gt;Dec 10&lt;/td&gt;&lt;td&gt;Dec 19&lt;/td&gt;&lt;td&gt;9&lt;/td&gt;&lt;td&gt;80.0%&lt;/td&gt;&lt;td class="negative"&gt;-4.36%&lt;/td&gt;&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/tbody&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/table&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p style="font-size: small; color: #777;"&gt;* Click column headers to sort.&lt;/p&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>function filterTable() {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>var input, filter, table, tr, td, i, txtValue;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input = document.getElementById("searchInput");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>filter = input.value.toUpperCase();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>table = document.getElementById("stockTable");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>tr = table.getElementsByTagName("tr");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>for (i = 1; i &lt; tr.length; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>td = tr[i].getElementsByTagName("td")[0];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (td) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>txtValue = td.textContent || td.innerText;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (txtValue.toUpperCase().indexOf(filter) &gt; -1) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>tr[i].style.display = "";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>tr[i].style.display = "none";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function sortTable(n) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>table = document.getElementById("stockTable");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>switching = true;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>dir = "asc";<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>while (switching) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>switching = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>rows = table.rows;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (i = 1; i &lt; (rows.length - 1); i++) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>shouldSwitch = false;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>x = rows[i].getElementsByTagName("TD")[n];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>y = rows[i + 1].getElementsByTagName("TD")[n];</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Check if numeric for sorting</p>
+<p class="p1"><span class="Apple-converted-space">                </span>var xContent = x.innerHTML.replace('%', '').replace('$', '').trim();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>var yContent = y.innerHTML.replace('%', '').replace('$', '').trim();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>var isNumeric = !isNaN(parseFloat(xContent)) &amp;&amp; isFinite(xContent);</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (dir == "asc") {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (isNumeric) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (parseFloat(xContent) &gt; parseFloat(yContent)) { shouldSwitch = true; break; }</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (x.innerHTML.toLowerCase() &gt; y.innerHTML.toLowerCase()) { shouldSwitch = true; break; }</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else if (dir == "desc") {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (isNumeric) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (parseFloat(xContent) &lt; parseFloat(yContent)) { shouldSwitch = true; break; }</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (x.innerHTML.toLowerCase() &lt; y.innerHTML.toLowerCase()) { shouldSwitch = true; break; }</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (shouldSwitch) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>switching = true;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>switchcount ++; <span class="Apple-converted-space">     </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (switchcount == 0 &amp;&amp; dir == "asc") {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>dir = "desc";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>switching = true;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
